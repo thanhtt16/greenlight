@@ -28,8 +28,8 @@
       </script>
     <% end %>
 
-    <title><%= yield(:page_title).present? ? yield(:page_title) : t("bigbluebutton") %></title>
-    <meta property="og:title" content="<%= yield(:page_title).present? ? yield(:page_title) : t("bigbluebutton") %>" />
+    <title><%= yield(:page_title).present? ? yield(:page_title) : ('Phòng học trực tuyến') %></title>
+    <meta property="og:title" content="<%= yield(:page_title).present? ? yield(:page_title) : ('Phòng học trực tuyến') %>" />
     <meta property="og:type" content="website" />
     <meta property="og:description" content="<%= yield(:page_desc).present? ? yield(:page_desc) : t("landing.about", href: "Greenlight", locale: :en) %>" />
     <meta property="og:url" content="<%= request.base_url %>" />
@@ -47,7 +47,7 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-    <%= favicon_link_tag asset_path('favicon.ico') %>
+    <%= favicon_link_tag asset_path('logo.png') %>
 
     <!-- Primary color styling -->
     <%= stylesheet_link_tag themes_primary_path %>
@@ -86,7 +86,5 @@
 
       <%= yield %>
     </div>
-
-    <%= render "shared/footer" %>
   </body>
 </html>

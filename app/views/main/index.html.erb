@@ -13,19 +13,149 @@
 # with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
 %>
 
-<div class="background">
-  <div class="container pt-9 pb-8">
-    <div class="row">
-      <div class="col-md-12 col-sm-12 text-center">
-        <h1 id="main-text" class="display-4 mb-4"> <%= t("landing.welcome").html_safe %></h1>
-        <p class="lead offset-lg-2 col-lg-8 col-sm-12 "><%= t("landing.about", href: link_to(t("greenlight"), "https://bigbluebutton.org/2018/07/09/greenlight-2-0/", target: "_blank", rel: "noopener")).html_safe %></p>
-        <%= link_to "https://youtu.be/Hso8yLzkqj8", target: "_blank" do %>
-          <h4><%= t("landing.video") %> <i class="far fa-play-circle ml-1"></i></h4>
-        <% end %>
-      </div>
-
+<div class="container-fluid pt-5 pb-8">
+  <div class="row">
+    <div class="col" style="text-align:center;">
+      <%= image_tag("intro/1.jpg", style: "height: 150px;") %>
+      <h5 class="text-center">
+        Desktop Sharing
+      </h5>
+      <p class="text-center">
+        Chia sẻ màn hình cho tất cả thành viên trong phòng cùng xem
+      </p>
+    </div>
+    <div class="col" style="text-align:center;">
+      <%= image_tag("intro/2.jpg", style: "height: 150px;") %>
+      <h5 class="text-center">
+        Audio
+      </h5>
+      <p class="text-center">
+        Giao tiếp bằng âm thanh chất lượng cao
+      </p>
+    </div>
+    <div class="col" style="text-align:center;">
+      <%= image_tag("intro/3.jpg", style: "height: 150px;") %>
+      <h5 class="text-center">
+        Webcam
+      </h5>
+      <p class="text-center">
+        Nhiều người dùng có thể chia sẻ webcam cùng một lúc
+      </p>
+    </div>
+    <div class="col" style="text-align:center;">
+      <%= image_tag("intro/4.jpg", style: "height: 150px;") %>
+      <h5 class="text-center">
+        Chat
+      </h5>
+      <p class="text-center">
+        Trò chuyện chung hoặc riêng với thành viên trong phòng
+      </p>
+    </div>
+    <div class="col" style="text-align:center;">
+      <%= image_tag("intro/5.jpg", style: "height: 150px;") %>
+      <h5 class="text-center">
+        Presentation
+      </h5>
+      <p class="text-center">
+        Chia sẻ tài liệu; phóng to, thu nhỏ màn hình trình bày
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col" style="text-align:center;">
+      <%= image_tag("intro/6.jpg", style: "height: 150px;") %>
+      <h5 class="text-center">
+        Whiteboard
+      </h5>
+      <p class="text-center">
+        Viết, vẽ mọi thứ...để chú thích các phần chính của bản trình bày
+      </p>
+    </div>
+    <div class="col" style="text-align:center;">
+      <%= image_tag("intro/7.jpg", style: "height: 150px;") %>
+      <h5 class="text-center">
+        Recording
+      </h5>
+      <p class="text-center">
+        Ghi âm cuộc họp và phát lại
+      </p>
+    </div>
+    <div class="col" style="text-align:center;">
+      <%= image_tag("intro/8.jpg", style: "height: 150px;") %>
+      <h5 class="text-center">
+        Breakout room
+      </h5>
+      <p class="text-center">
+        Chia thành viên thành các nhóm để trao đổi, thảo luận riêng
+      </p>
+    </div>
+    <div class="col" style="text-align:center;">
+      <%= image_tag("intro/9.jpg", style: "height: 150px;") %>
+      <h5 class="text-center">
+        Emojis
+      </h5>
+      <p class="text-center">
+        Thay đổi trạng thái bằng các biểu tượng cảm xúc
+      </p>
+    </div>
+    <div class="col" style="text-align:center;">
+      <%= image_tag("intro/10.jpg", style: "height: 150px;") %>
+      <h5 class="text-center">
+        Polling
+      </h5>
+      <p class="text-center">
+        Tạo các cuộc khảo sát trong phòng học
+      </p>
+    </div>
+  </div>
+</div>
+<div class="container pb-8">
+  <div class="row justify-content-md-center">
+    <div class="col" style="text-align:center;">
+      <h1 class="text-primary" style="font-weight:bold">
+        CÔNG TY CỔ PHẦN CÔNG NGHỆ HMT
+      </h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <i class="fas fa-map-marker-alt fa-2x mr-3" style="color:lightskyblue"></i>
+      <label class="text-primary">
+        Thành Thái, Câu Giấy, HN
+      </label>
+    </div>
+    <div class="col">
+      <i class="fas fa-phone-square-alt fa-2x mr-3" style="color:lightskyblue"></i>
+      <label class="text-primary">
+        0969 987 729
+      </label>
+    </div>
+    <div class="col">
+      <i class="fab fa-facebook fa-2x mr-3" style="color:lightskyblue"></i>
+      <a href="https://www.facebook.com/phonghoc.online" target="_blank" class="text-primary">
+        https://www.facebook.com/phonghoc.online
+      </a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <i class="fas fa-globe fa-2x mr-3" style="color:lightskyblue"></i>
+      <a href="https://phonghoc.online/" target="_blank" class="text-primary">
+        https://phonghoc.online/
+      </a>
+    </div>
+    <div class="col">
+      <i class="fas fa-envelope fa-2x mr-3" style="color:lightskyblue"></i>
+      <label class="text-primary">
+        hmt@phonghoc.online
+      </label>
+    </div>
+    <div class="col">
+      <i class="fab fa-linkedin fa-2x mr-3" style="color:lightskyblue"></i>
+      <a href="https://www.linkedin.com/company/hmt-tech" target="_blank" class="text-primary">
+        https://www.linkedin.com/company/hmt-tech
+      </a>
     </div>
   </div>
 </div>
 
-<%= render "main/components/features" %>
