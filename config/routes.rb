@@ -43,6 +43,7 @@ Rails.application.routes.draw do
     get '/site_settings', to: 'admins#site_settings', as: :admin_site_settings
     get '/room_configuration', to: 'admins#room_configuration', as: :admin_room_configuration
     get '/roles', to: 'admins#roles', as: :admin_roles
+    get '/companies', to: 'admins#companies', as: :admin_companies
     # Manage Users
     get '/edit/:user_uid', to: 'admins#edit_user', as: :admin_edit_user
     post '/ban/:user_uid', to: 'admins#ban_user', as: :admin_ban

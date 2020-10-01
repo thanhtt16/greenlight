@@ -45,6 +45,9 @@ class AdminsController < ApplicationController
     @pagy, @users = pagy(manage_users_list)
   end
 
+  def companies
+  end
+
   # GET /admins/site_settings
   def site_settings
     @tab = params[:tab] || "appearance"
