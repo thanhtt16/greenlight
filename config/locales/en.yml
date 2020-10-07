@@ -185,6 +185,29 @@ en:
         view: View
     companies:
       title: Manage Companies
+      table:
+        name: Name
+        manager: Manager
+        created: Created At
+        not_found: No companies match your search
+        no_companies: No companies found
+      settings:
+        add: Add
+        approve: Approve
+        decline: Decline
+        ban: Ban User
+        delete: Delete
+        edit: Edit
+        edit_roles: Edit the user roles
+        merge: Merge
+        perm_delete: Permanently Delete
+        unban: Unban User
+        undelete: Undelete
+      add:
+        name: Name
+        description: Description
+        image: Image
+        image_url: Image Url
     title: Organization Settings
     users:
       invite: Invite User

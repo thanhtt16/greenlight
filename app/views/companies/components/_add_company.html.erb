@@ -1,0 +1,51 @@
+<%
+  # BigBlueButton open source conferencing system - http://www.bigbluebutton.org/.
+  # Copyright (c) 2018 BigBlueButton Inc. and by respective authors (see below).
+  # This program is free software; you can redistribute it and/or modify it under the
+  # terms of the GNU Lesser General Public License as published by the Free Software
+  # Foundation; either version 3.0 of the License, or (at your option) any later
+  # version.
+  #
+  # BigBlueButton is distributed in the hope that it will be useful, but WITHOUT ANY
+  # WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+  # PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.
+  # You should have received a copy of the GNU Lesser General Public License along
+  # with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
+%>
+
+<%= form_for @company, url: create_company_path, method: :post do |f|  %>
+  <%= hidden_field_tag :setting, "account" %>
+  <div class="form-group">
+    <div class="row">
+      <div class="col-sm-6 mb-4">
+        <%= f.label :name, t("administrator.companies.add.name"), class: "form-label" %>
+        <div class="input-icon">
+          <%= f.text_field :name, class: "form-control #{form_is_invalid?(@company, :name)}", placeholder: t("administrator.companies.add.name") %>
+        </div>
+      </div>
+
+      <div class="col-sm-6 mb-4">
+        <%= f.label :description, t("administrator.companies.add.description"), class: "form-label" %>
+        <div class="input-icon">
+          <%= f.text_area :description, class: "form-control #{form_is_invalid?(@company, :description)}", placeholder: t("administrator.companies.add.description") %>
+        </div>
+      </div>
+    </div>
+    <%= f.label :image, t("administrator.companies.add.image"), class: "form-label mt-5" %>
+    <div class="row">
+      <div class="col-5 col-sm-2">
+        <% if @company.image.blank? || !valid_url?(@company.image) %>
+          <span class="avatar avatar-xxl mr-5 mt-2 bg-primary"><%= @company.name.first %></span>
+        <% else %>
+          <%= image_tag(@company.image, class: "avatar avatar-xxl mr-5 mt-2") %>
+        <% end %>
+      </div>
+      <div class="col-7 col-sm-10 mt-5">
+        <%= f.text_field :image, class: "form-control #{form_is_invalid?(@company, :image)}", placeholder: t("administrator.companies.add.image_url") %>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <%= f.submit t("update"), class: "btn btn-primary float-right ml-4" %>
+  </div>
+<% end %>

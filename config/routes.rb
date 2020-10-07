@@ -53,6 +53,9 @@ Rails.application.routes.draw do
     get '/reset', to: 'admins#reset', as: :admin_reset
     post '/undelete', to: 'admins#undelete', as: :admin_undelete
     post '/merge/:user_uid', to: 'admins#merge_user', as: :merge_user
+    # Manage Companies
+    get '/companies/add', to: 'admins#add_company', as: :admin_add_company
+    get '/companies/edit/:company_id', to: 'admins#edit_company', as: :admin_edit_company
     # Site Settings
     post '/update_settings', to: 'admins#update_settings', as: :admin_update_settings
     post '/registration_method', to: 'admins#registration_method', as: :admin_change_registration
@@ -101,6 +104,11 @@ Rails.application.routes.draw do
 
     # All user recordings
     get '/:user_uid/recordings', to: 'users#recordings', as: :get_user_recordings
+  end
+
+  # Company resources
+  scope '/company' do
+    post '/create', to: 'companies#create', as: :create_company
   end
 
   # Handles Omniauth authentication.

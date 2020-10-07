@@ -85,4 +85,9 @@ module Populator
     return initial_list unless Rails.configuration.loadbalanced_configuration
     initial_list.where(provider: @user_domain)
   end
+
+  # Returns a list of companies
+  def company_list
+    Company.all
+  end
 end

@@ -46,6 +46,14 @@ class AdminsController < ApplicationController
   end
 
   def companies
+    # Initializa the data manipulation variables
+    @search = params[:search] || ""
+    @order_column = params[:column] && params[:direction] != "none" ? params[:column] : "created_at"
+    @order_direction = params[:direction] && params[:direction] != "none" ? params[:direction] : "DESC"
+
+    @company_list = company_list
+
+    @pagy, @companies = pagy(company_list)
   end
 
   # GET /admins/site_settings
