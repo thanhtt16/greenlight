@@ -25,7 +25,7 @@
       <div class="table-responsive">
         <%= link_to admin_add_company_path, class: "dropdown-item" do %>
           <button class="btn-primary">
-            <i class="fas fa fa-building"></i> <%= t("administrator.companies.settings.add") %>
+            <i class="fas fa fa-building"></i> <%= t("administrator.companies.add_company") %>
           </button>
         <% end %>
         <table class="table table-hover table-outline table-vcenter card-table">
@@ -39,27 +39,8 @@
                 ↑
               <% end %>
             </th>
-<!--            <th data-header="email" data-order="<%#= @order_column == "email" ? @order_direction : "none" %>">-->
-              <%#= t("administrator.users.table.username") %>
-              <%# if @order_column == "email" && @order_direction == "desc" %>
-<!--                ↓-->
-              <%# elsif @order_column == "email" && @order_direction == "asc" %>
-<!--                ↑-->
-              <%# end %>
-<!--            </th>-->
-<!--            <th class="text-left" data-header="provider" data-order="<%#= @order_column == "provider" ? @order_direction : "none" %>">-->
-              <%#= t("administrator.users.table.authenticator") %>
-              <%# if @order_column == "provider" && @order_direction == "desc" %>
-<!--                ↓-->
-              <%# elsif @order_column == "provider" && @order_direction == "asc" %>
-<!--                ↑-->
-              <%# end %>
-<!--            </th>-->
-            <th class="text-center">
-              <%= t("administrator.companies.table.manager") %>
-            </th>
-            <th class="text-center">
-              <%= t("administrator.companies.table.created") %>
+            <th data-header="description">
+              <%= t("administrator.companies.table.description") %>
             </th>
             <th class="text-center">
             </th>
@@ -78,56 +59,29 @@
                   <div><%= company.name %></div>
                   <div class="small text-muted"><%= [t("administrator.companies.table.created"), ": ", company.created_at].join %></div>
                 </td>
-                <td class="user-email"><%= user.email && user.email != "" ? user.email : user.username%></td>
-                <td><%= user.provider %></td>
-                <td class="text-center">
-                  <%= render "admins/components/admins_role", role: user.role %>
+                <td>
+                  <div><%= company.description %></div>
                 </td>
                 <td>
-                  <%# if !user.has_role?("super_admin") %>
-<!--                    <div class="item-action dropdown">-->
-<!--                      <a href="javascript:void(0)" data-toggle="dropdown" class="icon">-->
-<!--                        <i class="fas fa-ellipsis-v px-4"></i>-->
-<!--                      </a>-->
-<!--                      <div class="dropdown-menu dropdown-menu">-->
-                        <%# if user.deleted? %>
-                          <%#= button_to admin_undelete_path(user_uid: user.uid), class: "dropdown-item", "data-disable": "" do %>
-<!--                            <i class="dropdown-icon fas fa-recycle"></i> <%#= t("administrator.users.settings.undelete") %>-->
-                          <%# end %>
-<!--                          <button class="delete-user dropdown-item" data-path="<%#= delete_user_path(user_uid: user.uid, permanent: "true") %>" data-toggle="modal" data-target="#deleteAccountModal">-->
-<!--                            <i class="dropdown-icon fas fa-skull-crossbones"></i> <%#= t("administrator.users.settings.perm_delete") %>-->
-<!--                          </button>-->
-                        <%# elsif user.has_role?("denied") %>
-                          <%#= button_to admin_unban_path(user_uid: user.uid), class: "dropdown-item", "data-disable": "" do %>
-<!--                            <i class="dropdown-icon fas fa-lock-open"></i> <%#= t("administrator.users.settings.unban") %>-->
-                          <%# end %>
-<!--                          <button class= "delete-user dropdown-item" data-path="<%#= delete_user_path(user_uid: user.uid) %>" data-delete="temp-delete" data-toggle="modal" data-target="#deleteAccountModal">-->
-<!--                            <i class="dropdown-icon fas fa-user-minus"></i> <%#= t("administrator.users.settings.delete") %>-->
-<!--                          </button>-->
-                        <%# elsif user.has_role?("pending") %>
-                          <%#= button_to admin_approve_path(user_uid: user.uid), class: "dropdown-item", "data-disable": "" do %>
-<!--                            <i class="dropdown-icon far fa-check-circle"></i> <%#= t("administrator.users.settings.approve") %>-->
-                          <%# end %>
-                          <%#= button_to admin_ban_path(user_uid: user.uid), class: "dropdown-item", "data-disable": "" do %>
-<!--                            <i class="dropdown-icon far fa-times-circle"></i> <%#= t("administrator.users.settings.decline") %>-->
-                          <%# end %>
-                        <%# else %>
-                          <%#= link_to admin_edit_user_path(user_uid: user.uid), class: "dropdown-item" do %>
-<!--                            <i class="dropdown-icon fas fa-user-edit"></i> <%#= t("administrator.users.settings.edit") %>-->
-                          <%# end %>
-<!--                          <button class= "merge-user dropdown-item" data-path="<%#= merge_user_path(user_uid: user.uid) %>" data-info="<%#= user.slice(:name, :email, :uid).to_json %>" data-toggle="modal" data-target="#mergeUserModal">-->
-<!--                            <i class="dropdown-icon fas fa-user-friends"></i> <%#= t("administrator.users.settings.merge") %>-->
-<!--                          </button>-->
-                          <%#= button_to admin_ban_path(user_uid: user.uid), class: "dropdown-item", "data-disable": "" do %>
-<!--                            <i class="dropdown-icon fas fa-lock"></i> <%#= t("administrator.users.settings.ban") %>-->
-                          <%# end %>
-<!--                          <button class= "delete-user dropdown-item" data-path="<%#= delete_user_path(user_uid: user.uid) %>" data-delete="temp-delete" data-toggle="modal" data-target="#deleteAccountModal">-->
-<!--                            <i class="dropdown-icon fas fa-user-minus"></i> <%#= t("administrator.users.settings.delete") %>-->
-<!--                          </button>-->
+                    <div class="item-action dropdown">
+                      <a href="javascript:void(0)" data-toggle="dropdown" class="icon">
+                        <i class="fas fa-ellipsis-v px-4"></i>
+                      </a>
+                      <div class="dropdown-menu dropdown-menu">
+                        <%= link_to admin_edit_company_path(company_id: company.id), class: "dropdown-item", "data-disable": "" do %>
+                          <i class="dropdown-icon fas fa-edit"></i> <%= t("administrator.companies.table.edit_company") %>
+                        <% end %>
+                        <%#= button_to admin_undelete_path(company_id: company.id), class: "dropdown-item", "data-disable": "" do %>
+<!--                          <i class="dropdown-icon fas fa-users"></i> <%#= t("administrator.companies.table.manage_user") %>-->
                         <%# end %>
-<!--                      </div>-->
-<!--                    </div>-->
-                  <%# end %>
+                        <%= button_to delete_company_path(company_id: company.id), data: { confirm: t("modal.delete_company.confirm") }, method: :delete, class: "dropdown-item", "data-disable": "" do %>
+                          <i class="dropdown-icon fas fa-trash-alt"></i> <%= t("administrator.companies.table.delete") %>
+                        <% end %>
+<!--                        <button class= "delete-user dropdown-item" data-path="<%#= delete_company_path(company_id: company.id) %>" data-delete="temp-delete" data-toggle="modal" data-target="#deleteCompanyModal">-->
+<!--                          <i class="dropdown-icon fas fa-trash-alt"></i> <%#= t("administrator.companies.table.delete") %>-->
+<!--                        </button>-->
+                      </div>
+                    </div>
                 </td>
               </tr>
             <% end %>
@@ -149,5 +103,5 @@
 </div>
 
 <%#= render "shared/modals/invite_user_modal" %>
-<%#= render "shared/modals/delete_account_modal", delete_location: relative_root %>
+<%= render "shared/modals/delete_company_modal", delete_location: relative_root %>
 <%#= render "shared/modals/merge_user_modal" %>

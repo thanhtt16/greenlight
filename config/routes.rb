@@ -109,6 +109,8 @@ Rails.application.routes.draw do
   # Company resources
   scope '/company' do
     post '/create', to: 'companies#create', as: :create_company
+    post '/edit/:company_id', to: 'companies#update', as: :update_company
+    delete '/:company_id', to: 'companies#destroy', as: :delete_company
   end
 
   # Handles Omniauth authentication.

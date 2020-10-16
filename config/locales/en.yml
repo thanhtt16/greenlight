@@ -185,29 +185,24 @@ en:
         view: View
     companies:
       title: Manage Companies
+      add_company: Add Company
       table:
         name: Name
+        description: Description
         manager: Manager
         created: Created At
         not_found: No companies match your search
         no_companies: No companies found
-      settings:
-        add: Add
-        approve: Approve
-        decline: Decline
-        ban: Ban User
-        delete: Delete
-        edit: Edit
-        edit_roles: Edit the user roles
-        merge: Merge
-        perm_delete: Permanently Delete
-        unban: Unban User
-        undelete: Undelete
+        edit_company: Edit Company
+        manage_user: Manage User
+        delete: Delete Company
       add:
         name: Name
+        manager: Manager Email
         description: Description
         image: Image
         image_url: Image Url
+        button: Submit
     title: Organization Settings
     users:
       invite: Invite User
@@ -433,6 +428,12 @@ en:
       delete: I'm sure, delete this account.
       keep: Actually, I'll keep it.
       delete_warning: This will deactivate the user's account. All deactived users can be found under the deleted tab.
+      warning: This decision is final. You will <b>not</b> be able to recover associated data.
+    delete_company:
+      confirm: Are you sure you want to delete this company?
+      delete: I'm sure, delete this company.
+      keep: Actually, I'll keep it.
+      delete_warning: This will completely delete the company and all company's user.
       warning: This decision is final. You will <b>not</b> be able to recover associated data.
     delete_rec:
       delete: I'm sure, delete this recording.

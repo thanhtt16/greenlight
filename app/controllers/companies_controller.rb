@@ -17,11 +17,32 @@
 # with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
 
 class CompaniesController < ApplicationController
-include Pagy::Backend
-include Authenticator
-# POST /company
-def create
-  print params
-  @company = Company.new(params)
-end
+  include Pagy::Backend
+  include Authenticator
+  # POST /company
+  def create
+    @company = Company.new(company_params)
+    @company.save
+    flash[:success] = "Create company successfully"
+    redirect_to admin_companies_path
+  end
+
+  # DELETE /company/:company_id
+  def destroy
+    @company = Company.find_by(id: params[:company_id])
+    Company.destroy(params[:company_id])
+    flash[:success] = "Delete company successfully"
+    redirect_to admin_companies_path
+  end
+
+  # POST /company/edit/:company_id
+  def update
+    @company = Company.find_by(id: params[:company_id])
+    @company.update_attributes(company_params)
+    redirect_to admin_companies_path, flash: { success: I18n.t("info_update_success") }
+  end
+
+  def company_params
+    params.require(:company).permit(:name, :description, :image)
+  end
 end

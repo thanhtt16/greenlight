@@ -13,39 +13,32 @@
   # with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
 %>
 
-<%= form_for @company, url: create_company_path, method: :post do |f|  %>
+<%= form_for(:company, url: create_company_path) do |f|  %>
   <%= hidden_field_tag :setting, "account" %>
   <div class="form-group">
     <div class="row">
-      <div class="col-sm-6 mb-4">
+      <div class="col-sm-12 mb-4">
         <%= f.label :name, t("administrator.companies.add.name"), class: "form-label" %>
         <div class="input-icon">
-          <%= f.text_field :name, class: "form-control #{form_is_invalid?(@company, :name)}", placeholder: t("administrator.companies.add.name") %>
+          <%= f.text_field :name, class: "form-control", placeholder: t("administrator.companies.add.name") %>
         </div>
       </div>
 
-      <div class="col-sm-6 mb-4">
+      <div class="col-sm-12 mb-4">
         <%= f.label :description, t("administrator.companies.add.description"), class: "form-label" %>
         <div class="input-icon">
-          <%= f.text_area :description, class: "form-control #{form_is_invalid?(@company, :description)}", placeholder: t("administrator.companies.add.description") %>
+          <%= f.text_area :description, class: "form-control", placeholder: t("administrator.companies.add.description") %>
         </div>
       </div>
-    </div>
-    <%= f.label :image, t("administrator.companies.add.image"), class: "form-label mt-5" %>
-    <div class="row">
-      <div class="col-5 col-sm-2">
-        <% if @company.image.blank? || !valid_url?(@company.image) %>
-          <span class="avatar avatar-xxl mr-5 mt-2 bg-primary"><%= @company.name.first %></span>
-        <% else %>
-          <%= image_tag(@company.image, class: "avatar avatar-xxl mr-5 mt-2") %>
-        <% end %>
-      </div>
-      <div class="col-7 col-sm-10 mt-5">
-        <%= f.text_field :image, class: "form-control #{form_is_invalid?(@company, :image)}", placeholder: t("administrator.companies.add.image_url") %>
+      <div class="col-sm-12 mb-4">
+        <%= f.label :image, t("administrator.companies.add.image"), class: "form-label" %>
+        <div class="input-icon">
+          <%= f.text_field :image, class: "form-control", placeholder: t("administrator.companies.add.image_url") %>
+        </div>
       </div>
     </div>
   </div>
   <div class="card-footer">
-    <%= f.submit t("update"), class: "btn btn-primary float-right ml-4" %>
+    <%= f.submit t("administrator.companies.add.button"), class: "btn btn-primary float-right ml-4" %>
   </div>
 <% end %>

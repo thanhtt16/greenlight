@@ -45,16 +45,23 @@ class AdminsController < ApplicationController
     @pagy, @users = pagy(manage_users_list)
   end
 
+  # GET /admin/companies
   def companies
     # Initializa the data manipulation variables
     @search = params[:search] || ""
-    @order_column = params[:column] && params[:direction] != "none" ? params[:column] : "created_at"
-    @order_direction = params[:direction] && params[:direction] != "none" ? params[:direction] : "DESC"
+    # @order_column = params[:column] && params[:direction] != "none" ? params[:column] : "id"
+    # @order_direction = params[:direction] && params[:direction] != "none" ? params[:direction] : "DESC"
 
-    @company_list = company_list
+    @company_list = Company.order('id asc').all
 
-    @pagy, @companies = pagy(company_list)
+    @pagy, @companies = pagy(@company_list, items: 10)
   end
+
+  # Get /admin/companies/edit/:company_id
+  def edit_company
+    @company = Company.find_by(id: params[:company_id])
+  end
+
 
   # GET /admins/site_settings
   def site_settings
