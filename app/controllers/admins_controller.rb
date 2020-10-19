@@ -50,6 +50,10 @@ class AdminsController < ApplicationController
     @pagy, @users = pagy(users)
   end
 
+  def manual_create_user
+    @user = User.new
+  end
+
   # GET /admin/companies
   def companies
     # Initializa the data manipulation variables

@@ -230,6 +230,7 @@ en:
         uid: User ID
         username: Username
         valid: Valid
+        create_user: Create User
       title: Manage Users
   add_to_google_calendar: "Add to Google Calendar"
   bigbluebutton: BigBlueButton
@@ -662,6 +663,7 @@ en:
     This deployment is using a pre-configured testing server, you should replace this with your own.
     For details, see the %{href}.
   update: Update
+  submit: Submit
   verify:
     accept: Verify
     activated: Account verified!
