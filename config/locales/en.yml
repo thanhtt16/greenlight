@@ -194,7 +194,7 @@ en:
         not_found: No companies match your search
         no_companies: No companies found
         edit_company: Edit Company
-        manage_user: Manage User
+        manage_user: Manage Users Company
         delete: Delete Company
       add:
         name: Name
@@ -231,6 +231,7 @@ en:
         username: Username
         valid: Valid
         create_user: Create User
+        remove_company_user: Remove User
       title: Manage Users
   add_to_google_calendar: "Add to Google Calendar"
   bigbluebutton: BigBlueButton
@@ -438,6 +439,8 @@ en:
       keep: Actually, I'll keep it.
       delete_warning: This will completely delete the company and all company's user.
       warning: This decision is final. You will <b>not</b> be able to recover associated data.
+    remove_company_user:
+      confirm: Are you sure you want to remove user from this company?
     delete_rec:
       delete: I'm sure, delete this recording.
       header: Are you sure you want to delete this recording?

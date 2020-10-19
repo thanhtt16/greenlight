@@ -71,6 +71,13 @@ class AdminsController < ApplicationController
     @company = Company.find_by(id: params[:company_id])
   end
 
+  # Get /admin/companies/manage_user/:company_id
+  def manage_user_company
+    @company = Company.find_by(id: params[:company_id])
+    @company_users = User.where(company_id: params[:company_id])
+    @pagy, @users = pagy(@company_users, items: 10)
+  end
+
 
   # GET /admins/site_settings
   def site_settings

@@ -13,12 +13,6 @@
   # with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
 %>
 
-<%# if @role.nil? %>
-  <%#= render "admins/components/manage_users_tags" %>
-<%# else %>
-  <%#= render "admins/components/admins_tags" %>
-<%# end %>
-
 <div class="form-group">
   <div class="row">
     <div class="col-12">
@@ -71,9 +65,9 @@
                         <%= link_to admin_edit_company_path(company_id: company.id), class: "dropdown-item", "data-disable": "" do %>
                           <i class="dropdown-icon fas fa-edit"></i> <%= t("administrator.companies.table.edit_company") %>
                         <% end %>
-                        <%#= button_to admin_undelete_path(company_id: company.id), class: "dropdown-item", "data-disable": "" do %>
-<!--                          <i class="dropdown-icon fas fa-users"></i> <%#= t("administrator.companies.table.manage_user") %>-->
-                        <%# end %>
+                        <%= link_to admin_company_manage_user_path(company_id: company.id), class: "dropdown-item", "data-disable": "" do %>
+                          <i class="dropdown-icon fas fa-users"></i> <%= t("administrator.companies.table.manage_user") %>
+                        <% end %>
                         <%= button_to delete_company_path(company_id: company.id), data: { confirm: t("modal.delete_company.confirm") }, method: :delete, class: "dropdown-item", "data-disable": "" do %>
                           <i class="dropdown-icon fas fa-trash-alt"></i> <%= t("administrator.companies.table.delete") %>
                         <% end %>
@@ -103,5 +97,5 @@
 </div>
 
 <%#= render "shared/modals/invite_user_modal" %>
-<%= render "shared/modals/delete_company_modal", delete_location: relative_root %>
+<%#= render "shared/modals/delete_company_modal", delete_location: relative_root %>
 <%#= render "shared/modals/merge_user_modal" %>

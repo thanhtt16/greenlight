@@ -42,6 +42,14 @@ class CompaniesController < ApplicationController
     redirect_to admin_companies_path, flash: { success: I18n.t("info_update_success") }
   end
 
+  # POST /company/remove_user/:company_id
+  def remove_user
+    @user = User.find_by(id: params[:user_id])
+    @user.company_id = nil
+    @user.save
+    redirect_to admin_company_manage_user_path
+  end
+
   def company_params
     params.require(:company).permit(:name, :description, :image)
   end
