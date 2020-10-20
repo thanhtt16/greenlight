@@ -40,18 +40,19 @@ class AdminsController < ApplicationController
     @tab = params[:tab] || "active"
     @role = params[:role] ? Role.find_by(name: params[:role], provider: @user_domain) : nil
 
-    if @tab == "invited"
-      users = invited_users_list
+    if current_user.has_role? :super_admin
+      if @tab == "invited"
+        users = invited_users_list
+      else
+        users = manage_users_list
+        @user_list = merge_user_list
+      end
     else
-      users = manage_users_list
-      @user_list = merge_user_list
+      users = User.where(company_id: current_user.company_id).where.not(id: current_user.id).admins_search(@search)
+                  .admins_order(@order_column, @order_direction)
     end
 
     @pagy, @users = pagy(users)
-  end
-
-  def manual_create_user
-    @user = User.new
   end
 
   # GET /admin/companies
@@ -74,8 +75,10 @@ class AdminsController < ApplicationController
   # Get /admin/companies/manage_user/:company_id
   def manage_user_company
     @company = Company.find_by(id: params[:company_id])
-    @company_users = User.where(company_id: params[:company_id])
+    @company_users = User.where(company_id: params[:company_id]).order('id desc')
+    @no_company_users = User.where(company_id: nil).order('id desc')
     @pagy, @users = pagy(@company_users, items: 10)
+    @pagy1, @users1 = pagy(@no_company_users, items: 5)
   end
 
 
@@ -119,6 +122,10 @@ class AdminsController < ApplicationController
   end
 
   # MANAGE USERS
+  # Get /admins/create
+  def manual_create_user
+      @user = User.new
+  end
 
   # GET /admins/edit/:user_uid
   def edit_user

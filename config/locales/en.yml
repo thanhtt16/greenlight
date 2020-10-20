@@ -221,6 +221,7 @@ en:
         undelete: Undelete
       table:
         authenticator: Authenticator
+        company: Company
         created: Created
         time: Time Sent
         name: Name
@@ -232,6 +233,7 @@ en:
         valid: Valid
         create_user: Create User
         remove_company_user: Remove User
+        add_company_user: Add User
       title: Manage Users
   add_to_google_calendar: "Add to Google Calendar"
   bigbluebutton: BigBlueButton
@@ -441,6 +443,8 @@ en:
       warning: This decision is final. You will <b>not</b> be able to recover associated data.
     remove_company_user:
       confirm: Are you sure you want to remove user from this company?
+    add_company_user:
+      confirm: Are you sure you want to add user to this company?
     delete_rec:
       delete: I'm sure, delete this recording.
       header: Are you sure you want to delete this recording?

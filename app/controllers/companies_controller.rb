@@ -45,8 +45,20 @@ class CompaniesController < ApplicationController
   # POST /company/remove_user/:company_id
   def remove_user
     @user = User.find_by(id: params[:user_id])
-    @user.company_id = nil
-    @user.save
+    if @user
+      @user.company_id = nil
+      @user.save
+    end
+    redirect_to admin_company_manage_user_path
+  end
+
+  # POST /company/add_user/:company_id
+  def add_user
+    @user = User.find_by(id: params[:user_id])
+    if @user
+      @user.company_id = params[:company_id]
+      @user.save
+    end
     redirect_to admin_company_manage_user_path
   end
 

@@ -67,7 +67,7 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
-  def manual_create
+  def manual_create_post
     @user = User.new(user_params)
     @user.provider = @user_domain
     @user.company_id = current_user.company_id
@@ -78,7 +78,7 @@ class UsersController < ApplicationController
     redirect_to admin_manual_create_user_path, flash: { alert: I18n.t("registration.invite.fail") } unless passes_invite_reqs
     @user.set_role :user
     @user.save
-    redirect_to root_path
+    redirect_to admins_path
   end
 
   # GET /u/:user_uid/edit

@@ -13,14 +13,10 @@
   # with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
 %>
 
+<h4>List User of Company</h4>
 <div class="row">
   <div class="col-12">
     <div class="table-responsive">
-      <%#= link_to admin_add_company_path, class: "dropdown-item" do %>
-<!--        <button class="btn-primary">-->
-<!--          <i class="fas fa fa-building"></i> <%#= t("administrator.companies.add_company") %>-->
-<!--        </button>-->
-      <%# end %>
       <table class="table table-hover table-outline table-vcenter card-table">
         <thead>
         <tr>
@@ -56,12 +52,12 @@
         </tr>
         </thead>
         <tbody id="users-table">
-          <tr id="no_users_found" style="display: none;">
-            <td colspan="7" class="text-center h4 p-6 font-weight-normal" >
-              <%= t("administrator.users.table.not_found") %>
-            </td>
-          </tr>
-          <% if @users %>
+        <tr id="no_users_found" style="display: none;">
+          <td colspan="7" class="text-center h4 p-6 font-weight-normal" >
+            <%= t("administrator.users.table.not_found") %>
+          </td>
+        </tr>
+        <% if @users %>
           <% @users.each do |user| %>
             <% if user != current_user %>
               <tr data-user-uid="<%= user.uid %>">
@@ -76,7 +72,7 @@
                 </td>
                 <td>
                   <% if !user.has_role?("super_admin") %>
-                    <%= button_to remove_company_user_path(company_id: @company.id), params: {user_id: user.id}, data: { confirm: t("modal.remove_company_user.confirm") }, method: :post, class: "dropdown-item", "data-disable": "" do %>
+                    <%= button_to remove_company_user_path(company_id: @company.id), params: {user_id: user.id}, data: { confirm: t("modal.remove_company_user.confirm") }, method: :post, class: "btn btn-warning", "data-disable": "" do %>
                       <i class="dropdown-icon fas fa-trash-alt"></i> <%= t("administrator.users.table.remove_company_user") %>
                     <% end %>
                   <% end %>
@@ -84,13 +80,13 @@
               </tr>
             <% end %>
           <% end %>
-          <% else %>
-            <tr>
-              <td colspan="7" class="text-center h4 p-6 font-weight-normal" >
-                <%= t("administrator.users.table.no_users") %>
-              </td>
-            </tr>
-          <% end %>
+        <% else %>
+          <tr>
+            <td colspan="7" class="text-center h4 p-6 font-weight-normal" >
+              <%= t("administrator.users.table.no_users") %>
+            </td>
+          </tr>
+        <% end %>
         </tbody>
       </table>
       <div class="float-md-right mt-4">
@@ -99,3 +95,81 @@
     </div>
   </div>
 </div>
+
+<h4>List User Of No Company</h4>
+<div class="row">
+  <div class="col-12">
+    <div class="table-responsive">
+      <table class="table table-hover table-outline table-vcenter card-table">
+        <thead>
+        <tr>
+          <th data-header="name" data-order="<%= @order_column == "name" ? @order_direction : "none" %>">
+            <%= t("administrator.users.table.name") %>
+            <% if @order_column == "name" && @order_direction == "desc" %>
+              ↓
+            <% elsif @order_column == "name" && @order_direction == "asc" %>
+              ↑
+            <% end %>
+          </th>
+          <th data-header="email" data-order="<%= @order_column == "email" ? @order_direction : "none" %>">
+            <%= t("administrator.users.table.username") %>
+            <% if @order_column == "email" && @order_direction == "desc" %>
+              ↓
+            <% elsif @order_column == "email" && @order_direction == "asc" %>
+              ↑
+            <% end %>
+          </th>
+          <th class="text-left" data-header="provider" data-order="<%= @order_column == "provider" ? @order_direction : "none" %>">
+            <%= t("administrator.users.table.authenticator") %>
+            <% if @order_column == "provider" && @order_direction == "desc" %>
+              ↓
+            <% elsif @order_column == "provider" && @order_direction == "asc" %>
+              ↑
+            <% end %>
+          </th>
+          <th class="text-center">
+          </th>
+        </tr>
+        </thead>
+        <tbody id="users-table">
+        <tr id="no_users_found" style="display: none;">
+          <td colspan="7" class="text-center h4 p-6 font-weight-normal" >
+            <%= t("administrator.users.table.not_found") %>
+          </td>
+        </tr>
+        <% if @users1 %>
+          <% @users1.each do |user| %>
+            <% if user != current_user %>
+              <tr data-user-uid="<%= user.uid %>">
+                <td>
+                  <div><%= user.name %></div>
+                  <div class="small text-muted"><%= [t("administrator.users.table.created"), ": ", user.created_at].join %></div>
+                </td>
+                <td class="user-email"><%= user.email && user.email != "" ? user.email : user.username%></td>
+                <td><%= user.provider %></td>
+                <td>
+                  <% if !user.has_role?("super_admin") %>
+                    <%= button_to add_company_user_path(company_id: @company.id), params: {user_id: user.id}, data: { confirm: t("modal.add_company_user.confirm") }, method: :post, class: "btn btn-primary", "data-disable": "" do %>
+                      <i class="dropdown-icon fas fa-plus-circle"></i><%= t("administrator.users.table.add_company_user") %>
+                    <% end %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
+        <% else %>
+          <tr>
+            <td colspan="7" class="text-center h4 p-6 font-weight-normal" >
+              <%= t("administrator.users.table.no_users") %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <div class="float-md-right mt-4">
+        <%== pagy_bootstrap_nav(@pagy1) %>
+      </div>
+    </div>
+  </div>
+</div>
+

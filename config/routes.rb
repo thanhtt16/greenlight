@@ -97,7 +97,7 @@ Rails.application.routes.draw do
     post '/logout', to: 'sessions#destroy'
 
     # Account management.
-    post '/create', to: 'users#manual_create', as: :manual_create_user
+    post '/create', to: 'users#manual_create_post', as: :manual_create_user
     get '/:user_uid/edit', to: 'users#edit', as: :edit_user
     get '/:user_uid/change_password', to: 'users#change_password', as: :change_password
     get '/:user_uid/delete_account', to: 'users#delete_account', as: :delete_account
@@ -115,6 +115,7 @@ Rails.application.routes.draw do
     post '/edit/:company_id', to: 'companies#update', as: :update_company
     delete '/:company_id', to: 'companies#destroy', as: :delete_company
     post '/remove_user/:company_id', to: 'companies#remove_user', as: :remove_company_user
+    post '/add_user/:company_id', to: 'companies#add_user', as: :add_company_user
   end
 
   # Handles Omniauth authentication.
