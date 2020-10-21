@@ -24,7 +24,7 @@ class AdminsController < ApplicationController
   include Rolify
   include Populator
 
-  manage_users = [:edit_user, :promote, :demote, :ban_user, :unban_user, :approve, :reset, :merge_user]
+  manage_users = [:manual_create_user, :edit_user, :promote, :demote, :ban_user, :unban_user, :approve, :reset, :merge_user]
   manage_deleted_users = [:undelete]
   authorize_resource class: false
   before_action :find_user, only: manage_users
