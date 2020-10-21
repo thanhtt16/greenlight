@@ -13,24 +13,22 @@
 # with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
 %>
 
-<%= button_to admin_manual_create_user_path, class: "btn btn-primary mb-4", "data-disable": "" do %>
+<%= link_to admin_manual_create_user_path, class: "btn btn-primary mb-4", "data-disable": "" do %>
   <i class="fas fa fa-plus-circle"></i> <%= t("administrator.users.table.create_user") %>
 <% end %>
 
 <% if current_user.has_role? :super_admin %>
-<% if @role.nil? %>
-  <%= render "admins/components/manage_users_tags" %>
-<% else %>
-  <%= render "admins/components/admins_tags" %>
-<% end %>
-
-<% if @tab == "invited" %>
-  <%= render "admins/components/invited_users_table" %>
-<% else %>
-  <%= render "admins/components/manage_users_table" %>
-  <%= render "shared/modals/merge_user_modal" %>
-<% end %>
-
+  <% if @role.nil? %>
+    <%= render "admins/components/manage_users_tags" %>
+  <% else %>
+    <%= render "admins/components/admins_tags" %>
+  <% end %>
+  <% if @tab == "invited" %>
+    <%= render "admins/components/invited_users_table" %>
+  <% else %>
+    <%= render "admins/components/manage_users_table" %>
+    <%= render "shared/modals/merge_user_modal" %>
+  <% end %>
   <%= render "shared/modals/invite_user_modal" %>
 <%else  %>
   <%= render "admins/components/manage_users_table" %>

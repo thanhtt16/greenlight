@@ -128,6 +128,9 @@
             <% end %>
           </th>
           <th class="text-center">
+            <%= t("administrator.users.table.role") %>
+          </th>
+          <th class="text-center">
           </th>
         </tr>
         </thead>
@@ -147,6 +150,9 @@
                 </td>
                 <td class="user-email"><%= user.email && user.email != "" ? user.email : user.username%></td>
                 <td><%= user.provider %></td>
+                <td class="text-center">
+                  <%= render "admins/components/admins_role", role: user.role %>
+                </td>
                 <td>
                   <% if !user.has_role?("super_admin") %>
                     <%= button_to add_company_user_path(company_id: @company.id), params: {user_id: user.id}, data: { confirm: t("modal.add_company_user.confirm") }, method: :post, class: "btn btn-primary", "data-disable": "" do %>

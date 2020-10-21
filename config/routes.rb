@@ -56,8 +56,8 @@ Rails.application.routes.draw do
     post '/merge/:user_uid', to: 'admins#merge_user', as: :merge_user
     # Manage Companies
     get '/companies/add', to: 'admins#add_company', as: :admin_add_company
-    get '/companies/edit/:company_id', to: 'admins#edit_company', as: :admin_edit_company
-    get '/companies/manage_user/:company_id', to: 'admins#manage_user_company', as: :admin_company_manage_user
+    get '/companies/edit/:company_uid', to: 'admins#edit_company', as: :admin_edit_company
+    get '/companies/manage_user/:company_uid', to: 'admins#manage_user_company', as: :admin_company_manage_user
     # Site Settings
     post '/update_settings', to: 'admins#update_settings', as: :admin_update_settings
     post '/registration_method', to: 'admins#registration_method', as: :admin_change_registration
@@ -112,10 +112,10 @@ Rails.application.routes.draw do
   # Company resources
   scope '/company' do
     post '/create', to: 'companies#create', as: :create_company
-    post '/edit/:company_id', to: 'companies#update', as: :update_company
-    delete '/:company_id', to: 'companies#destroy', as: :delete_company
-    post '/remove_user/:company_id', to: 'companies#remove_user', as: :remove_company_user
-    post '/add_user/:company_id', to: 'companies#add_user', as: :add_company_user
+    post '/edit/:company_uid', to: 'companies#update', as: :update_company
+    delete '/delete/:company_id', to: 'companies#destroy', as: :delete_company
+    post '/remove_user/:company_uid', to: 'companies#remove_user', as: :remove_company_user
+    post '/add_user/:company_uid', to: 'companies#add_user', as: :add_company_user
   end
 
   # Handles Omniauth authentication.

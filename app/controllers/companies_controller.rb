@@ -27,37 +27,44 @@ class CompaniesController < ApplicationController
     redirect_to admin_companies_path
   end
 
-  # DELETE /company/:company_id
+  # DELETE /company/:company_uid
   def destroy
     @company = Company.find_by(id: params[:company_id])
-    Company.destroy(params[:company_id])
-    flash[:success] = "Delete company successfully"
+    if @company
+      @company.users.delete_all
+      Company.delete(@company.id)
+      flash[:success] = "Delete company successfully"
+    end
     redirect_to admin_companies_path
   end
 
-  # POST /company/edit/:company_id
+  # POST /company/edit/:company_uid
   def update
-    @company = Company.find_by(id: params[:company_id])
-    @company.update_attributes(company_params)
-    redirect_to admin_companies_path, flash: { success: I18n.t("info_update_success") }
+    @company = Company.find_by(uid: params[:company_uid])
+    if @company
+      @company.update_attributes(company_params)
+      flash[:success] = I18n.t("info_update_success")
+    end
+    redirect_to admin_companies_path
   end
 
-  # POST /company/remove_user/:company_id
+  # POST /company/remove_user/:company_uid
   def remove_user
+    @company = Company.find_by(uid: params[:company_uid])
     @user = User.find_by(id: params[:user_id])
-    if @user
+    if @user && @company
       @user.company_id = nil
       @user.save
     end
     redirect_to admin_company_manage_user_path
   end
 
-  # POST /company/add_user/:company_id
+  # POST /company/add_user/:company_uid
   def add_user
+    @company = Company.find_by(uid: params[:company_uid])
     @user = User.find_by(id: params[:user_id])
-    if @user
-      @user.company_id = params[:company_id]
-      @user.save
+    if @user && @company
+      @company.users << @user
     end
     redirect_to admin_company_manage_user_path
   end

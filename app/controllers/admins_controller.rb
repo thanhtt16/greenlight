@@ -48,7 +48,9 @@ class AdminsController < ApplicationController
         @user_list = merge_user_list
       end
     else
-      users = User.where(company_id: current_user.company_id).where.not(id: current_user.id).admins_search(@search)
+      users = User.where(company_id: current_user.company_id)
+                  .where.not(id: current_user.id)
+                  .manager_search(@search)
                   .admins_order(@order_column, @order_direction)
     end
 
@@ -59,26 +61,35 @@ class AdminsController < ApplicationController
   def companies
     # Initializa the data manipulation variables
     @search = params[:search] || ""
-    # @order_column = params[:column] && params[:direction] != "none" ? params[:column] : "id"
-    # @order_direction = params[:direction] && params[:direction] != "none" ? params[:direction] : "DESC"
+    @order_column = params[:column] && params[:direction] != "none" ? params[:column] : "id"
+    @order_direction = params[:direction] && params[:direction] != "none" ? params[:direction] : "DESC"
 
-    @company_list = Company.order('id asc').all
+    @company_list = Company.admins_search(@search).admins_order(@order_column, @order_direction)
 
     @pagy, @companies = pagy(@company_list, items: 10)
   end
 
-  # Get /admin/companies/edit/:company_id
+  # Get /admin/companies/edit/:company_uid
   def edit_company
-    @company = Company.find_by(id: params[:company_id])
+    @company = Company.find_by(uid: params[:company_uid])
   end
 
-  # Get /admin/companies/manage_user/:company_id
+  # Get /admin/companies/manage_user/:company_uid
   def manage_user_company
-    @company = Company.find_by(id: params[:company_id])
-    @company_users = User.where(company_id: params[:company_id]).order('id desc')
-    @no_company_users = User.where(company_id: nil).order('id desc')
-    @pagy, @users = pagy(@company_users, items: 10)
-    @pagy1, @users1 = pagy(@no_company_users, items: 5)
+    @search = params[:search] || ""
+    @order_column = params[:column] && params[:direction] != "none" ? params[:column] : "id"
+    @order_direction = params[:direction] && params[:direction] != "none" ? params[:direction] : "DESC"
+    @company = Company.find_by(uid: params[:company_uid])
+    if @company
+      @company_users = User.where(company_id: @company.id)
+                           .manager_search(@search)
+                           .admins_order(@order_column, @order_direction)
+      @no_company_users = User.where(company: nil)
+                              .manager_search(@search)
+                              .admins_order(@order_column, @order_direction)
+      @pagy, @users = pagy(@company_users, items: 10)
+      @pagy1, @users1 = pagy(@no_company_users, items: 5)
+    end
   end
 
 
