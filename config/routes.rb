@@ -46,6 +46,7 @@ Rails.application.routes.draw do
     get '/companies', to: 'admins#companies', as: :admin_companies
     # Manage Users
     get '/create', to: 'admins#manual_create_user', as: :admin_manual_create_user
+    post '/create', to: 'users#manual_create_post', as: :manual_create_user
     get '/edit/:user_uid', to: 'admins#edit_user', as: :admin_edit_user
     post '/ban/:user_uid', to: 'admins#ban_user', as: :admin_ban
     post '/unban/:user_uid', to: 'admins#unban_user', as: :admin_unban
@@ -97,7 +98,7 @@ Rails.application.routes.draw do
     post '/logout', to: 'sessions#destroy'
 
     # Account management.
-    post '/create', to: 'users#manual_create_post', as: :manual_create_user
+    # post '/create', to: 'users#manual_create_post', as: :manual_create_user
     get '/:user_uid/edit', to: 'users#edit', as: :edit_user
     get '/:user_uid/change_password', to: 'users#change_password', as: :change_password
     get '/:user_uid/delete_account', to: 'users#delete_account', as: :delete_account
