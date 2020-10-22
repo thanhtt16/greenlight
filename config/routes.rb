@@ -114,9 +114,11 @@ Rails.application.routes.draw do
   scope '/company' do
     post '/create', to: 'companies#create', as: :create_company
     post '/edit/:company_uid', to: 'companies#update', as: :update_company
-    delete '/delete/:company_id', to: 'companies#destroy', as: :delete_company
+    delete '/delete/:company_uid', to: 'companies#destroy', as: :delete_company
     post '/remove_user/:company_uid', to: 'companies#remove_user', as: :remove_company_user
     post '/add_user/:company_uid', to: 'companies#add_user', as: :add_company_user
+    post '/stop_service/:company_uid', to: 'companies#stop_service', as: :stop_service_company
+    post '/start_service/:company_uid', to: 'companies#start_service', as: :start_service_company
   end
 
   # Handles Omniauth authentication.

@@ -12,6 +12,18 @@
   # You should have received a copy of the GNU Lesser General Public License along
   # with BigBlueButton; if not, see <http://www.gnu.org/licenses/>.
 %>
+<div class="row mb-4">
+  <div class="col-sm-3">
+    <%= button_to stop_service_company_path(company_uid: @company.uid), data: { confirm: t("modal.stop_service_company.confirm") }, method: :post, class: "btn btn-warning mb-5", "data-disable": "" do %>
+      <i class="fas fa-stop"></i> <%= t("administrator.companies.table.stop_service") %>
+    <% end %>
+  </div>
+  <div class="col-sm-3">
+    <%= button_to start_service_company_path(company_uid: @company.uid), data: { confirm: t("modal.start_service_company.confirm") }, method: :post, class: "btn btn-success mb-5", "data-disable": "" do %>
+      <i class="fas fa-play"></i> <%= t("administrator.companies.table.start_service") %>
+    <% end %>
+  </div>
+</div>
 
 <%= form_for @company, url: update_company_path, method: :post do |f|  %>
   <%= hidden_field_tag :setting, "account" %>

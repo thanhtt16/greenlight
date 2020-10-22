@@ -29,7 +29,7 @@ class CompaniesController < ApplicationController
 
   # DELETE /company/:company_uid
   def destroy
-    @company = Company.find_by(id: params[:company_id])
+    @company = Company.find_by(uid: params[:company_uid])
     if @company
       @company.users.delete_all
       Company.delete(@company.id)
@@ -67,6 +67,30 @@ class CompaniesController < ApplicationController
       @company.users << @user
     end
     redirect_to admin_company_manage_user_path
+  end
+
+  # POST /company/stop_service/:company_uid
+  def stop_service
+    @company = Company.find_by(uid: params[:company_uid])
+    if @company
+      @company.users.each do |user|
+        user.set_role :denied
+      end
+      flash[:success] = "Stop service success"
+    end
+    redirect_to admin_edit_company_path
+  end
+
+  # POST /company/start_service/:company_uid
+  def start_service
+    @company = Company.find_by(uid: params[:company_uid])
+    if @company
+      @company.users.each do |user|
+        user.set_role :user
+      end
+      flash[:success] = "Start service success"
+    end
+    redirect_to admin_edit_company_path
   end
 
   def company_params

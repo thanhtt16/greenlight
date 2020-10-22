@@ -196,6 +196,8 @@ en:
         edit_company: Edit Company
         manage_user: Manage Users Company
         delete: Delete Company
+        stop_service: Stop Service
+        start_service: Start Service
       add:
         name: Name
         manager: Manager Email
@@ -441,6 +443,10 @@ en:
       keep: Actually, I'll keep it.
       delete_warning: This will completely delete the company and all company's user.
       warning: This decision is final. You will <b>not</b> be able to recover associated data.
+    stop_service_company:
+      confirm: Are you sure you want to stop service of this company?
+    start_service_company:
+      confirm: Are you sure you want to start service of this company?
     remove_company_user:
       confirm: Are you sure you want to remove user from this company?
     add_company_user:
