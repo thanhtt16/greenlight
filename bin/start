@@ -1,6 +1,8 @@
 #!/bin/bash
 
+bundle update
 if [ "$RAILS_ENV" = "production" ] && [ "$DB_ADAPTER" = "postgresql" ]; then
+  echo "DB Host: $DB_HOST, http://$DB_HOST:${DB_PORT:-5432}/"
   while ! curl http://$DB_HOST:${DB_PORT:-5432}/ 2>&1 | grep '52'
   do
     echo "Waiting for postgres to start up ..."
