@@ -87,8 +87,9 @@ class AdminsController < ApplicationController
       @no_company_users = User.where(company: nil)
                               .manager_search(@search)
                               .admins_order(@order_column, @order_direction)
-      @pagy, @users = pagy(@company_users, items: 10)
-      @pagy1, @users1 = pagy(@no_company_users, items: 5)
+      @pagy, @users = pagy(@company_users, items: 5)
+      # @pagy1, @users1 = pagy(@no_company_users, items: 5)
+      @users1 = @no_company_users
     end
   end
 
