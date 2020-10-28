@@ -101,8 +101,9 @@ class AdminsController < ApplicationController
 
   # GET /admins/server_recordings
   def server_recordings
-    server_rooms = rooms_list_for_recordings
-
+    check_super_admin = current_user.has_role? :super_admin
+    get_company_rec = check_super_admin ? false : true
+    server_rooms = rooms_list_for_recordings(get_company_rec)
     @search, @order_column, @order_direction, recs =
       all_recordings(server_rooms, params.permit(:search, :column, :direction), true, true)
 

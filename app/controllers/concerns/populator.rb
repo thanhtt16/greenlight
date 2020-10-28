@@ -65,11 +65,17 @@ module Populator
   end
 
   # Returns list of rooms needed to get the recordings on the server
-  def rooms_list_for_recordings
+  def rooms_list_for_recordings(get_company_rec = false)
+    where_cond = { users: { provider: @user_domain } }
+    where_cond1 = {}
+    if get_company_rec
+      where_cond[:company_id] = current_user.company_id
+      where_cond1[:company_id] = current_user.company_id
+    end
     if Rails.configuration.loadbalanced_configuration
-      Room.includes(:owner).where(users: { provider: @user_domain }).pluck(:bbb_id)
+      Room.includes(:owner).where(where_cond).pluck(:bbb_id)
     else
-      Room.pluck(:bbb_id)
+      Room.where(where_cond1).pluck(:bbb_id)
     end
   end
 
