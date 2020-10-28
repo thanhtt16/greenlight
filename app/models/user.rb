@@ -201,7 +201,7 @@ class User < ApplicationRecord
   end
 
   def create_home_room
-    room = Room.create!(owner: self, name: I18n.t("home_room"))
+    room = Room.create!(owner: self, name: I18n.t("home_room"), company_id: self.company_id)
     update_attributes(main_room: room)
   end
 

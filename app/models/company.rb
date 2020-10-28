@@ -1,6 +1,7 @@
 class Company < ApplicationRecord
   after_create :setup_company
   has_many :users, dependent: :destroy
+  has_many :rooms, dependent: :destroy
   def self.admins_search(string)
     return all if string.blank?
     search_query = "LOWER( companies.name ) LIKE :search"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_15_114246) do
+ActiveRecord::Schema.define(version: 2020_10_27_031819) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -109,7 +109,9 @@ ActiveRecord::Schema.define(version: 2020_10_15_114246) do
     t.string "attendee_pw"
     t.string "access_code"
     t.boolean "deleted", default: false, null: false
+    t.bigint "company_id"
     t.index ["bbb_id"], name: "index_rooms_on_bbb_id"
+    t.index ["company_id"], name: "index_rooms_on_company_id"
     t.index ["deleted"], name: "index_rooms_on_deleted"
     t.index ["last_session"], name: "index_rooms_on_last_session"
     t.index ["name"], name: "index_rooms_on_name"
