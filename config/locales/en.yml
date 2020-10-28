@@ -183,6 +183,7 @@ en:
         started: "Started: %{session}"
         status: Status
         view: View
+        company: Company
     companies:
       title: Manage Companies
       add_company: Add Company

@@ -43,6 +43,11 @@
                 ↑
               <% end %>
             </th>
+            <% if current_user.has_role? :super_admin %>
+              <th>
+                <%= t("administrator.rooms.table.company") %>
+              </th>
+            <%end %>
             <th>
               <%= t("administrator.rooms.table.participants") %>
             </th>

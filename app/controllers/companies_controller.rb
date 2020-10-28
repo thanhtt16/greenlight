@@ -53,9 +53,14 @@ class CompaniesController < ApplicationController
     @company = Company.find_by(uid: params[:company_uid])
     @user = User.find_by(id: params[:user_id])
     if @user && @company
+      @user.rooms.each do |room|
+        room.company_id = nil
+        room.save
+      end
       @user.company_id = nil
       @user.save
     end
+    flash[:success] = "Remove user success"
     redirect_to admin_company_manage_user_path
   end
 
@@ -65,7 +70,9 @@ class CompaniesController < ApplicationController
     @user = User.find_by(id: params[:user_id])
     if @user && @company
       @company.users << @user
+      @company.rooms << @user.rooms
     end
+    flash[:success] = "Add user success"
     redirect_to admin_company_manage_user_path
   end
 

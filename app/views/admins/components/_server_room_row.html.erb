@@ -40,6 +40,11 @@
   <td class="text-left">
     <%= room.uid %>
   </td>
+  <% if current_user.has_role? :super_admin %>
+    <td class="text-left">
+      <%= room.company ? room.company.name : ""  %></td>
+    </td>
+  <%end %>
   <td class="text-center">
     <%= @participants_count[room.bbb_id].presence || "-" %>
   </td>
