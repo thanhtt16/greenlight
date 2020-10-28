@@ -126,7 +126,11 @@ class AdminsController < ApplicationController
 
     @user_list = shared_user_list if shared_access_allowed
 
-    @pagy, @rooms = pagy_array(server_rooms_list)
+    if current_user.has_role? :super_admin
+      @pagy, @rooms = pagy_array(server_rooms_list)
+    else
+      @pagy, @rooms = pagy_array(server_rooms_list(true))
+    end
   end
 
   # GET /admins/room_configuration

@@ -46,13 +46,21 @@ module Populator
   end
 
   # Returns a list of rooms that are in the same context of the current user
-  def server_rooms_list
+  def server_rooms_list(get_company_room = false)
+    where_cond = { users: { provider: @user_domain } }
+    where_cond1 = {}
+    if get_company_room
+      where_cond[:company_id] = current_user.company_id
+      where_cond1[:company_id] = current_user.company_id
+    end
     if Rails.configuration.loadbalanced_configuration
-      Room.includes(:owner).where(users: { provider: @user_domain })
+      Room.includes(:owner).where(where_cond)
           .admins_search(@search)
           .admins_order(@order_column, @order_direction, @running_room_bbb_ids)
     else
-      Room.includes(:owner).admins_search(@search).admins_order(@order_column, @order_direction, @running_room_bbb_ids)
+      Room.includes(:owner).where(where_cond1)
+          .admins_search(@search)
+          .admins_order(@order_column, @order_direction, @running_room_bbb_ids)
     end
   end
 
